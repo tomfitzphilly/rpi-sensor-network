@@ -22,14 +22,19 @@ def init_database():
     conn.close()
 
 def store_reading(device_id, timestamp, temperature, humidity, co2):
-    conn = sqlite3.connect('sensor_data.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-        INSERT INTO sensor_readings (device_id, timestamp, temperature, humidity, co2)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (device_id, timestamp, temperature, humidity, co2))
-    conn.commit()
-    conn.close()
+    print("deviceid: ", str(device_id))
+    try:
+        conn = sqlite3.connect('sensor_data.db')
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO sensor_readings (device_id, timestamp, temperature, humidity, co2)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (device_id, timestamp, temperature, humidity, co2))
+        conn.commit()
+    except e:
+        print(f"error in store_reading - {e}")
+    finally:
+        conn.close()
 
 def handle_client(client_socket, addr):
     try:
@@ -40,6 +45,8 @@ def handle_client(client_socket, addr):
             
             try:
                 reading = json.loads(data.decode())
+                print( "sending to store_reading", str(reading))
+                print(reading['device_id'])
                 store_reading(
                     reading['device_id'],
                     reading['timestamp'],
