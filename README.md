@@ -1,6 +1,6 @@
 # Raspberry Pi Sensor Network
 
-A distributed sensor network system using Raspberry Pi 3 as a central server and multiple Raspberry Pi Pico (RP2040) clients with SCD30 CO2 sensors.
+A distributed sensor network system using Raspberry Pi 3 as a central server and multiple Raspberry Pi Pico (RP2040) clients with SCD4X CO2 sensors.
 
 ## System Architecture
 
@@ -10,7 +10,6 @@ A distributed sensor network system using Raspberry Pi 3 as a central server and
   - Data validation and storage management
 
 - **Clients (Raspberry Pi Pico)**
-  - SCD30 CO2 sensor integration
   - SCD40 integration
   - WiFi connectivity
   - Automatic reconnection handling
@@ -20,7 +19,7 @@ A distributed sensor network system using Raspberry Pi 3 as a central server and
 
 - 1x Raspberry Pi 3 (Server)
 - 3x Raspberry Pi Pico W (Clients)
-- 3x Sensirion SCD30 or SCD4X CO2 Sensors
+- 3x Sensirion SCD4X CO2 Sensors
 - Power supplies for all devices
 - WiFi network access
 
@@ -46,8 +45,7 @@ This part is not quite finished.  I may need to change the libraries and resulta
 1. Install MicroPython on your Raspberry Pi Pico W if not already installed
 
 2. Copy the following files to each Pico:
-   - `client.py`
-   - `scd30.py`
+   - `client.py
 
 3. Edit `client.py` and update the configuration:
    ```python
